@@ -12,8 +12,8 @@ const CategoryFilter = () => {
     setSelectedOption(option);
     setIsOpen(false);
   };
-
-  const options = ["All Categories", "Tourist Attractions", "Restaurants", "Accomodation"];
+  
+  const options = ["All Categories", "Tourist Attractions", "Restaurants", "Accomodation", "Transportation"];
 
   return (
     <div className="filter-container w-auto bg-gray-700 mb-4 hover:bg-gray-600 rounded-lg p-2 px-4 font-thin border border-gray-600" onClick={toggleDropdown}>
