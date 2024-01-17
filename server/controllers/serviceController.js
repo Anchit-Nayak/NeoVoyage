@@ -1,4 +1,6 @@
 const service = require("../models/service");
+const user = require('../models/user')
+const review = require('../models/review')
 
 const getServices = async (req, res) => {
   try {
@@ -8,7 +10,7 @@ const getServices = async (req, res) => {
         { $sample: { size: 20 } },
       ]);
 
-    //   console.log(randomRecords);
+
       return res.json(randomRecords);
     } else {
       const sortType = sortByRate === "hightolow" ? -1 : 1;
@@ -37,4 +39,20 @@ const postReview = async (req,res,next) => {
     }
 }
 
-module.exports = { getServices, postReview };
+const getServiceDetails = async (req,res) => {
+    try{
+        const {serviceId} = req.params
+        const serviceDetails = await service.findById(serviceId).lean();
+        if(!serviceDetails) return res.status(404).json({message:"No Such Service Found"})
+        const owner = await user.findById(serviceDetails.ownedBy);
+        const reviews = await review.find({service: serviceId})
+        // console.log({...serviceDetails, owner: owner.fullName, reviews})
+        res.json({...serviceDetails, owner: owner.fullName, reviews})
+
+    } catch(err){
+        console.log(err)
+        res.status(500).json({message:"Internal Server error"})
+    }
+}
+
+module.exports = { getServices, postReview, getServiceDetails };
