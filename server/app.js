@@ -22,6 +22,8 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+app.use('/service',require('./routers/serviceRouter'))
+
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
