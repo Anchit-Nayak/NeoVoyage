@@ -13,7 +13,7 @@ const RatingFilter = () => {
       setIsOpen(false);
     };
   
-    const options = ["None", "Low to high", "High to low"];
+    const options = ["None", "High To Low", "Low To High"];
   
     return (
       <div className="filter-container w-auto bg-gray-700 mb-4 hover:bg-gray-600 rounded-lg p-2 px-4 font-thin border border-gray-600" onClick={toggleDropdown}>

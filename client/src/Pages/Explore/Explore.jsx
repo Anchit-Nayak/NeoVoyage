@@ -1,10 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import CategoryFilter from '../../Components/Explore/CategoryFilter'
 import RatingFilter from '../../Components/Explore/RatingFilter';
 import LocationFilter from '../../Components/Explore/LocationFilter';
+import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
+
 
 const Explore = () => {
+  const notify = () => {
+    console.log("called");
+    toast('');
+  }
+
+  const [services, setServices] = useState([11, 121, 1, 1,1,1,1, 1,1,1]);
+
+  const [selectedCards, setSelectedCards] = useState([]);
+
+  const [buttonColor, setButtonColor] = useState('bg-gray-500 cursor-default')
+  
+  const [canCompare, setCompare] = useState(0);
+
+  const handleCheckboxChange = (card) => {
+      setSelectedCards((prevSelected) => {
+        const isSelected = prevSelected.includes(card);
+        if (isSelected) {
+          return prevSelected.filter((selectedCard) => selectedCard !== card);
+        } else {
+          return [...prevSelected, card];
+        }
+      });
+  };
+
+  useEffect(()=>{
+    if(selectedCards.length>1 && selectedCards.length<=3) {
+      setButtonColor('bg-primary-500 hover:bg-primary-400 cursor-pointer');
+      setCompare(1);
+    }
+    else {
+      setButtonColor('bg-gray-500 cursor-default');
+      setCompare(0);
+    }
+  }, [selectedCards.length])
+
+  // useEffect(()=>{
+  //   axios.get('')
+  //   .then((res) => {setServices(res)});
+  // }, [])
+
   return (
     <div className='wrapper-container h-screen w-full py-3'>
       <form className=''>   
@@ -21,17 +64,30 @@ const Explore = () => {
       </form>
       <div className='w-full space-y-4 py-10 h-full flex flex-row'>
          <div className='w-3/4'>
-         <Card/>
-         <Card/>
+         {services.length == 0 ?
+         <h1 className='text-4xl font-bold text-gray-300'>No Services Available</h1>  
+         :services.map((service, index)=>{
+          return <Card key={index} onCheckboxChange={handleCheckboxChange} index={index}/>
+         })}
          </div>
-        
+         
+         {services.length == 0 ?
+         "" :
          <div className='flex flex-col w-1/4 ml-3'>
          <CategoryFilter/>
          <RatingFilter/>
          <LocationFilter/>
+         <a href={`/compare`} className={`${canCompare ? ``: `pointer-events-none`} w-full`}>
+         <button className={`w-full p-4 text-white ${buttonColor} px-7 py-3 rounded-xl`} onClick={()=>`${canCompare? "": notify}`}>
+          Compare
+         </button>
+         </a>
          </div>
+         }
+         
+         </div>
+         <Toaster/>
       </div>
-    </div>
   )
 }
 
