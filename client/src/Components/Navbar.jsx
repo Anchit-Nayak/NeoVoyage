@@ -5,12 +5,17 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Explore', href: '/explore', current: false },
-  { name: 'Advisory', href: '/', current: false },
+  { name: 'Advisory', href: '/advisory', current: false },
   { name: 'Contact', href: '/#contact', current: false },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
+}
+
+const signOut = () =>{
+  localStorage.clear();
+  location.reload();
 }
 
 const Navbar = () => {
@@ -97,6 +102,7 @@ const Navbar = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <button
+                            onClick={signOut}
                             type='submit'
                             className={classNames(active ? 'text-start bg-gray-900 w-full' : '', 'w-full block text-start px-4 py-2 text-sm text-white')}
                           >

@@ -9,6 +9,8 @@ import Service from './Pages/Service/Service';
 import Advisory from './Pages/Advisory/Advisory';
 import OtpVerification from './Pages/OtpVerification';
 import BuisnessSignup from './Pages/Signup/BuisnessSignup';
+import Dashboard from './Pages/BuisnessDashboard.jsx/Dashboard';
+import Form from './Pages/BuisnessDashboard.jsx/Form';
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
         <Route path="/service/:id" element={<Service/>} />
         <Route path='/advisory' element={<Advisory/>}/>
       </Route>
+      <Route path='/dashboard' element={<Dashboard/>}/>
+      <Route path='/form' element={<Form/>}/>
       <Route path="/servicesignup" element={<BuisnessSignup/>} />
       <Route path="verification" element={<OtpVerification/>}/>
       <Route path="/signin" element={<Signin/>} />

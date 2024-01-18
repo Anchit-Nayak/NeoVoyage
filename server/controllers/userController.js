@@ -191,14 +191,14 @@ const login = async (req, res, next) => {
   try {
     let { email, password } = req.body;
     if (!email) {
-      res.status(401).send("Email is required");
+      return res.status(401).send("Email is required");
     }
     if (!password) {
-      res.status(401).send("The password field is required");
+      return res.status(401).send("The password field is required");
     }
     const user = await db.findOne({ email });
     if (!user) {
-      res.status(401).send("User not Found. Please Sign Up!");
+      return res.status(401).send("User not Found. Please Sign Up!");
     }
     if (user) {
       if (!user.isActive) {
@@ -226,6 +226,7 @@ const login = async (req, res, next) => {
         res
           .status(408)
           .json({message:"Verify your email address by entering the OTP sent to your email",userId:user._id});
+        return
       } else {
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
