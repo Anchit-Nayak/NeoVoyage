@@ -6,6 +6,9 @@ import Layout from './Layout';
 import Explore from './Pages/Explore/Explore';
 import Compare from './Pages/Compare/Compare';
 import Service from './Pages/Service/Service';
+import Advisory from './Pages/Advisory/Advisory';
+import OtpVerification from './Pages/OtpVerification';
+import BuisnessSignup from './Pages/Signup/BuisnessSignup';
 
 function App() {
 
@@ -16,7 +19,10 @@ function App() {
         <Route path="/explore" element={<Explore/>} />
         <Route path="/compare" element={<Compare/>} />
         <Route path="/service/:id" element={<Service/>} />
+        <Route path='/advisory' element={<Advisory/>}/>
       </Route>
+      <Route path="/servicesignup" element={<BuisnessSignup/>} />
+      <Route path="verification" element={<OtpVerification/>}/>
       <Route path="/signin" element={<Signin/>} />
       <Route path="/signup" element={<Signup />} />
     </Routes>

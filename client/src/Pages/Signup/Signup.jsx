@@ -1,6 +1,36 @@
-import React from 'react'
+import React, {useState} from 'react'
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+    const otpflag = "Already Signed Up, Please Verify your Email."
+    const [values, setValues] = useState({
+        fullName:"",
+        email:"",
+        password:"",
+
+    });
+    const navigate = useNavigate()
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
+        try{
+          const response = await axios.post("", {
+            ...values,
+          });
+          console.log(response);
+          console.log(response.data.id);
+          const id = response.data.id;
+          toast.success("Registration Successfull!")
+          navigate("/verification", {state: {key : id}});
+        } catch (error){
+          console.log(error);
+          toast.error(error.response.data.message);
+          if(error.response.data.message == otpflag){
+            navigate("/signin")
+          }
+        }
+    }
   return (
     <section class="bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -13,10 +43,10 @@ const Signup = () => {
               <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
                   Create an account
               </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
+              <form onSubmit={(e)=>handleSubmit(e)} class="space-y-4 md:space-y-6" action="#">
                   <div>
                       <label for="Name" class="block mb-2 text-sm font-medium text-white">Your Name</label>
-                      <input type="Name" name="fullName" id="Name" class="sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white " placeholder="Full Name" required=""/>
+                      <input type="Name" name="fullName" id="Name" class="sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white " placeholder="Full Name" required="" onChange={(e)=>setValues({...values, [e.target.name]:e.target.value})}/>
                   </div>
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-white">Your email</label>
@@ -39,7 +69,7 @@ const Signup = () => {
                       Already have an account? <a href="/signin" class="font-medium  hover:underline text-primary-500">Login here</a>
                   </p>
               </form>
-              
+              <Toaster/>
           </div>
       </div>
   </div>
