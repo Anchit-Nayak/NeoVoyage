@@ -35,6 +35,10 @@ const servicesSchema = new mongoose.Schema({
       honestyRating:{
         type: Number,
         required: true,
+      },
+      verified: {
+        type: Boolean,
+        required: true
       }
     
   });
