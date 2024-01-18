@@ -5,16 +5,12 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const OtpVerification = () => {
   const { state } = useLocation();
-  //const id=state.key;
+  const id=state.key;
   const [num, setNum] = useState('');
   const navigate = useNavigate()
   const handleSubmit = async(e) =>{
     e.preventDefault();
     try{
-      console.log("datatype of id: " + typeof(id));
-      console.log(id)
-      console.log("datatype of otp: " + typeof(num));
-      console.log(num);
       const response = await axios.post("http://localhost:3000/user/verifyotp", {
         id: id,
         otp: num,
@@ -23,7 +19,7 @@ const OtpVerification = () => {
       localStorage.setItem("accessToken",response.data.accessToken)
       localStorage.setItem("userId",response.data._id)
       localStorage.setItem("email",response.data.email)
-      localStorage.setItem("userType",response.data.userType)
+      localStorage.setItem("role",response.data.role)
       toast.success("Registration Successfull!")
       navigate("/");
     } catch (error){
