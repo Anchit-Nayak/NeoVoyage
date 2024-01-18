@@ -23,6 +23,7 @@ app.use(morgan('dev'));
 app.use(cors());
 
 app.use('/service',require('./routers/serviceRouter'))
+app.use('/user',require('./routers/userRouter'))
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
