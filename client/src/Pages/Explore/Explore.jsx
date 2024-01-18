@@ -82,19 +82,20 @@ const Explore = () => {
          })}
          </div>
          
-         {services.length == 0 ?
-         "" :
          <div className='flex flex-col w-1/4 ml-3'>
         <CategoryFilter setCategory={setCategory}/>
          <RatingFilter setRatingFilter={setRatingFilter}/>
          <LocationFilter setLocation={setLocation}/>
+          {
+            services.length == 0 ?
+         "" :
          <a href={`/compare`} className={`${canCompare ? ``: `pointer-events-none`} w-full`}>
          <button className={`w-full p-4 text-white ${buttonColor} px-7 py-3 rounded-xl`} onClick={()=>`${canCompare? "": notify}`}>
           Compare
          </button>
          </a>
-         </div>
          }
+         </div>
          
          </div>
          <Toaster/>
