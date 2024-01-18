@@ -10,8 +10,8 @@ const Hero = () => {
             <div>
             </div>
             <p className='text-gray-200 py-2'>Pioneering Your Path to Modern Exploration and Unforgettable Adventures.</p>
-            <a href="#invest" className='w-[200px]'>
-            <button  className='bg-slate-950 hover:bg-slate-200 shadow-4xl w-[200px] rounded-md font-medium my-6 mx-auto py-3'>Get Started</button>     
+            <a href="#service" className='w-[200px] absolute mt-80'>
+            <button  className='bg-primary-600 hover:bg-primary-500 shadow-4xl w-[200px] rounded-md font-medium my-6 mx-auto py-3'>Get Started</button>     
             </a>
         </div>
     </div>

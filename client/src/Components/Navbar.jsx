@@ -34,11 +34,13 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
+                  <a href="/">
                   <img
                     className="h-7 w-auto mr-2"
                     src="https://api.domatron.com/storage/icons/e1d3f5/jq.svg"
                     alt=""
                   />
+                  </a>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
