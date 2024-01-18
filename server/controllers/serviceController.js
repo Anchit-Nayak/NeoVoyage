@@ -1,6 +1,7 @@
 const service = require("../models/service");
 const user = require('../models/user')
 const review = require('../models/review')
+const moment = require('moment')
 
 const getServices = async (req, res) => {
   try {
@@ -38,13 +39,13 @@ const getServices = async (req, res) => {
 const postReview = async (req,res,next) => {
     try{
         const {userId,comment,service} = req.body;
-        const user = await user.findById(userId)
-        if(!user) return res.status(404).json({message:"User Not Found"})
-        const review = await review.create({user,userId, service, comment})
+        const User = await user.findById(userId)
+        if(!User) return res.status(404).json({message:"User Not Found"})
+        const Review = await review.create({user:userId, service, comment,epoch:moment().unix()})
         res.status(200).json({message:"Review Posted Successflly!"})
 
     } catch(err){
-        consolr.log(err)
+        console.log(err)
         res.status(500).json({message:"Internal Server error"})
     }
 }
@@ -55,7 +56,7 @@ const getServiceDetails = async (req,res) => {
         const serviceDetails = await service.findById(serviceId).lean();
         if(!serviceDetails) return res.status(404).json({message:"No Such Service Found"})
         const owner = await user.findById(serviceDetails.ownedBy);
-        const reviews = await review.find({service: serviceId})
+        const reviews = await review.find({service: serviceId}).populate('user','fullName')
         // console.log({...serviceDetails, owner: owner.fullName, reviews})
         res.json({...serviceDetails, owner: owner.fullName, reviews})
 

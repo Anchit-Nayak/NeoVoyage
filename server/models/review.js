@@ -14,6 +14,10 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    epoch: {
+      type: Number,
+      required: true
+    }
   });
 
   const Review = mongoose.model("review", reviewSchema);

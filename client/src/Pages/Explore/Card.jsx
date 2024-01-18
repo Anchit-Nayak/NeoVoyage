@@ -15,7 +15,7 @@ const Card = ({cardData, onCheckboxChange, index, service}) => {
 
   return (
     <div className='w-full h-auto text-white'>
-    <a href={`/service/1`} className="w-full h-[200px] mx-auto flex flex-col border mb-4 border-gray-500 rounded-xl md:flex-row bg-gray-800 hover:bg-gray-700">
+    <a href={`/service/${service?._id}`} className="w-full h-[200px] mx-auto flex flex-col border mb-4 border-gray-500 rounded-xl md:flex-row bg-gray-800 hover:bg-gray-700">
         <img className="w-[350px] rounded-xl h-[200px] p-1" src={service?.image} alt=""/>
         <div className="p-4 flex flex-row w-full justify-between">
          <div className=''>
