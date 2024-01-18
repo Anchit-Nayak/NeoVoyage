@@ -16,7 +16,7 @@ const getServices = async (req, res) => {
     } else {
       const serviceFilter = serviceType=='all' ? {} :  { type: serviceType}
       const sortType = sortByRate=='none' ? 0 : sortByRate === "hightolow" ? -1 : 1;
-      const locationFilter = location=='none' ? {} : {location};
+      const locationFilter = location=='All Categories' ? {} : {location};
       let records;
       if(!sortType){
         records = await service
