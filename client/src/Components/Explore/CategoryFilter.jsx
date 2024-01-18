@@ -42,7 +42,7 @@ const CategoryFilter = ({setCategory}) => {
             <li
               key={index}
               onClick={() => selectOption(option)}
-              className={`${selectedOption === option ? 'selected' : ''} px-3 py-3 sm:pb-4 hover:bg-gray-900 rounded-lg`}
+              className={`${selectedOption === options[option] ? 'selected bg-gray-900' : ''} px-3 py-3 sm:pb-4 hover:bg-gray-900 rounded-lg`}
             >
               {option}
             </li>
