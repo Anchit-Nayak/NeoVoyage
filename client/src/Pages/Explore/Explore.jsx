@@ -4,16 +4,27 @@ import CategoryFilter from '../../Components/Explore/CategoryFilter'
 import RatingFilter from '../../Components/Explore/RatingFilter';
 import LocationFilter from '../../Components/Explore/LocationFilter';
 import toast, { Toaster } from 'react-hot-toast';
-import axios from 'axios';
+import { getServices } from '../../api';
 
 
 const Explore = () => {
+  const [category,setCategory] = useState('all');
+  const [ratingFilter, setRatingFilter] = useState('none')
+  const [location, setLocation] = useState('none')
+  const [services, setServices] = useState([])
+
+  useEffect(()=>{
+    (async function(){
+      const response = await getServices({serviceType: category, sortByRate: ratingFilter, location})
+      console.log(response)
+      setServices(response)
+    })()
+
+  },[category,ratingFilter,location])
   const notify = () => {
     console.log("called");
     toast('');
   }
-
-  const [services, setServices] = useState([11, 121, 1, 1,1,1,1, 1,1,1]);
 
   const [selectedCards, setSelectedCards] = useState([]);
 
@@ -67,16 +78,16 @@ const Explore = () => {
          {services.length == 0 ?
          <h1 className='text-4xl font-bold text-gray-300'>No Services Available</h1>  
          :services.map((service, index)=>{
-          return <Card key={index} onCheckboxChange={handleCheckboxChange} index={index}/>
+          return <Card key={index} onCheckboxChange={handleCheckboxChange} index={index} service={service}/>
          })}
          </div>
          
          {services.length == 0 ?
          "" :
          <div className='flex flex-col w-1/4 ml-3'>
-         <CategoryFilter/>
-         <RatingFilter/>
-         <LocationFilter/>
+        <CategoryFilter setCategory={setCategory}/>
+         <RatingFilter setRatingFilter={setRatingFilter}/>
+         <LocationFilter setLocation={setLocation}/>
          <a href={`/compare`} className={`${canCompare ? ``: `pointer-events-none`} w-full`}>
          <button className={`w-full p-4 text-white ${buttonColor} px-7 py-3 rounded-xl`} onClick={()=>`${canCompare? "": notify}`}>
           Compare

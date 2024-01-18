@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 
-const CategoryFilter = () => {
+const CategoryFilter = ({setCategory}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('all');
 
   const toggleDropdown = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
   };
 
   const selectOption = (option) => {
-    setSelectedOption(option);
+    setSelectedOption(options[option]);
+    setCategory(options[option]);
     setIsOpen(false);
   };
-  
-  const options = ["All Categories", "Tourist Attractions", "Restaurants", "Accomodation", "Transportation"];
+  // console.log(selectedOption)
+
+  const options = {
+    "All Categories":"all", 
+    "Tourist Attractions":"attraction",
+    "Restaurants":"restaurant",
+    "Accomodation":"accommodation",
+    "Transportation":"transportation"
+  };
 
   return (
     <div className="filter-container w-auto bg-gray-700 mb-4 hover:bg-gray-600 rounded-lg p-2 px-4 font-thin border border-gray-600" onClick={toggleDropdown}>
@@ -30,7 +38,7 @@ const CategoryFilter = () => {
       </button>
       {isOpen && (
         <ul className="filter-options text-white max-w-md divide-y divide-gray-700">
-          {options.map((option, index) => (
+          {Object.keys(options).map((option, index) => (
             <li
               key={index}
               onClick={() => selectOption(option)}
