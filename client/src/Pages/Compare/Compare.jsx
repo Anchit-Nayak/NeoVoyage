@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useState , useEffect} from 'react'
 import CompareCard from './CompareCard';
 
-const Compare = ({}) => {
+const Compare = () => {
+  const [dataArray, setDataArray] = useState([]);
+
+  useEffect(() => {
+    // Retrieve the array from localStorage
+    const storedArray = localStorage.getItem('myArray');
+
+    if (storedArray) {
+      const parsedArray = JSON.parse(storedArray);
+      setDataArray(parsedArray);
+    }
+  }, []);
   return (
-    <div className='wrapper-container h-full w-full text-white py-10 flex items-center justify-between space-x-3'>
-      <CompareCard/>
-      <CompareCard/>
-      <CompareCard/>
+    <div className='wrapper-container h-full w-full text-white py-10 flex items-baseline justify-between space-x-3'>
+      {
+        dataArray.map((id)=>{
+          return <CompareCard key={id} id={id}/>
+        })
+      }
     </div>
   )
 }
