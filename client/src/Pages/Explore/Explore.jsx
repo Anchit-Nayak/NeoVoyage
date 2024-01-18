@@ -10,7 +10,7 @@ import { getServices } from '../../api';
 const Explore = () => {
   const [category,setCategory] = useState('all');
   const [ratingFilter, setRatingFilter] = useState('none')
-  const [location, setLocation] = useState('none')
+  const [location, setLocation] = useState('All Categories')
   const [services, setServices] = useState([])
 
   useEffect(()=>{

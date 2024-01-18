@@ -24,9 +24,17 @@ const servicesSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      rating:{
+      safetyRating: {
         type: Number,
-        required: true
+        required: true,
+      },
+      priceRating: {
+        type: Number,
+        required: true,
+      },
+      honestyRating:{
+        type: Number,
+        required: true,
       }
     
   });
