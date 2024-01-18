@@ -1,17 +1,28 @@
 import React from 'react'
 
-const Card = () => {
+const Card = ({service}) => {
+  let ratingName;
+  if(service?.rating <= 3 && service?.rating >= 0) ratingName = 'Inadequate';
+  else if(service?.rating <= 6 && service?.rating >= 4) ratingName = 'Satisfactory';
+  else if(service?.rating <= 8 && service?.rating >= 7) ratingName = 'Good';
+  else ratingName = 'Excellent';
+  const options = {
+    "attraction":"Tourist Attractions",
+    "restaurant":"Restaurants",
+    "accommodation":"Accomodation",
+    "transportation":"Transportation"
+  };
   return (
     <div className='w-full h-auto text-white'>
     <a href={``} className="w-full h-[200px] mx-auto flex flex-col border mb-4 border-gray-500 rounded-xl md:flex-row bg-gray-800 hover:bg-gray-700">
-        <img className="w-[350px] rounded-xl h-[200px] p-1" src="src/assets/hero_image.jpeg" alt=""/>
+        <img className="w-[350px] rounded-xl h-[200px] p-1" src={service?.image} alt=""/>
         <div className="p-4 flex flex-row">
          <div>
           <div className='flex items-start'>
-            <h5 className="block mb-3 text-3xl font-bold text-white">Hotel Meridian</h5>
+            <h5 className="block mb-3 text-3xl font-bold text-white">{service?.name}</h5>
           </div>
             <div className='text-start'>
-            <p className="mb-2  font-normal text-gray-400">Hotel</p>
+            <p className="mb-2  font-normal text-gray-400">{options[service?.type]}</p>
 
             <p className='mb-2 text-gray-400 flex'>
                 <span>
@@ -20,8 +31,8 @@ const Card = () => {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                 </svg>
                 </span>
-                <span className='text-primary-500'>Mumbai</span></p>
-            <p className='mb-2 text-gray-400'><span className='text-primary-500'>9.6 - Excellent</span> (85 Reviews)</p>
+                <span className='text-primary-500'>{service?.location}</span></p>
+            <p className='mb-2 text-gray-400'><span className='text-primary-500'>{service?.rating} - {ratingName}</span> (85 Reviews)</p>
             </div>
             </div>
         </div>

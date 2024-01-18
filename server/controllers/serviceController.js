@@ -4,8 +4,9 @@ const review = require('../models/review')
 
 const getServices = async (req, res) => {
   try {
-    const { serviceType, sortByRate, location, all } = req.body;
-    if (all) {
+    const { serviceType, sortByRate, location } = req.body;
+    // console.log(req.body)
+    if (serviceType=='all' && sortByRate=='none' && location=='none') {
       const randomRecords = await service.aggregate([
         { $sample: { size: 20 } },
       ]);
@@ -13,10 +14,19 @@ const getServices = async (req, res) => {
 
       return res.json(randomRecords);
     } else {
-      const sortType = sortByRate === "hightolow" ? -1 : 1;
-      const records = await service
-        .find({ type: serviceType, location })
+      const serviceFilter = serviceType=='all' ? {} :  { type: serviceType}
+      const sortType = sortByRate=='none' ? 0 : sortByRate === "hightolow" ? -1 : 1;
+      const locationFilter = location=='none' ? {} : {location};
+      let records;
+      if(!sortType){
+        records = await service
+        .find({ ...serviceFilter, ...locationFilter })
+      }
+      else{
+        records = await service
+        .find({ ...serviceFilter, ...locationFilter })
         .sort({ rating: sortType });
+      }
       return res.json(records);
     }
   } catch (err) {

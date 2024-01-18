@@ -1,10 +1,25 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Card from './Card'
 import CategoryFilter from '../../Components/Explore/CategoryFilter'
 import RatingFilter from '../../Components/Explore/RatingFilter';
 import LocationFilter from '../../Components/Explore/LocationFilter';
+import { getServices } from '../../api';
 
 const Explore = () => {
+  const [category,setCategory] = useState('all');
+  const [ratingFilter, setRatingFilter] = useState('none')
+  const [location, setLocation] = useState('none')
+  const [services, setServices] = useState([])
+
+  useEffect(()=>{
+    (async function(){
+      const response = await getServices({serviceType: category, sortByRate: ratingFilter, location})
+      console.log(response)
+      setServices(response)
+    })()
+
+  },[category,ratingFilter,location])
+
   return (
     <div className='wrapper-container h-screen w-full py-3'>
       <form className=''>   
@@ -21,14 +36,13 @@ const Explore = () => {
       </form>
       <div className='w-full space-y-4 py-10 h-full flex flex-row'>
          <div className='w-3/4'>
-         <Card/>
-         <Card/>
+          {services?.map((service,index) => <Card key={index} service={service}/>)}
          </div>
         
          <div className='flex flex-col w-1/4 ml-3'>
-         <CategoryFilter/>
-         <RatingFilter/>
-         <LocationFilter/>
+         <CategoryFilter setCategory={setCategory}/>
+         <RatingFilter setRatingFilter={setRatingFilter}/>
+         <LocationFilter setLocation={setLocation}/>
          </div>
       </div>
     </div>

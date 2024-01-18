@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const LocationFilter = () => {
+const LocationFilter = ({setLocation}) => {
     const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -10,6 +10,7 @@ const LocationFilter = () => {
 
   const selectOption = (option) => {
     setSelectedOption(option);
+    setLocation(option);
     setIsOpen(false);
   };
 
