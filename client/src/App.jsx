@@ -19,7 +19,7 @@ const isAuthenticated = () => {
 const TouristRoute = ({ component: Component }) => {
   if (isAuthenticated()) {
     const type = localStorage.getItem("role");
-    if(type == "business"){
+    if(type === "business"){
       return <Navigate to="/signin" />
     }
     return <Component />;
@@ -32,7 +32,7 @@ const TouristRoute = ({ component: Component }) => {
 const BusinessRoute = ({ component: Component }) => {
   if (isAuthenticated()) {
     const type = localStorage.getItem("role");
-    if(type == "tourist"){
+    if(type === "tourist"){
       return <Navigate to="/" />
     }
     return <Component />;
@@ -48,7 +48,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<Home/>} />
+<<<<<<< HEAD
         <Route path="/explore" element={<TouristRoute component={Explore}/>} />
+=======
+        {/* <Route path="/explore" element={<TouristRoute component={<Explore/>}/>} /> */}
+        <Route path="/explore" element={<Explore/>}/>
+>>>>>>> d3bcf52925db2d384398c7aa307651caa3ed189a
         <Route path="/compare" element={<Compare/>} />
         <Route path="/service/:id" element={<Service/>} />
         <Route path='/advisory' element={<Advisory/>}/>
