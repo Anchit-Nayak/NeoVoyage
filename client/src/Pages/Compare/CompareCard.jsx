@@ -16,16 +16,16 @@ const CompareCard = ({id}) => {
       const response = await getServiceDetails(id)
       console.log(response)
       setService(response)
-      if(response?.rating <= 3 && response?.rating >= 0) setRatingName('Inadequate');
-      else if(response?.rating <= 6 && response?.rating >= 4) setRatingName('Satisfactory');
-      else if(response?.rating <= 8 && response?.rating >= 7) setRatingName('Good');
+      if(response?.rating <= 3) setRatingName('Inadequate');
+      else if(response?.rating <= 6) setRatingName('Satisfactory');
+      else if(response?.rating <= 8) setRatingName('Good');
       else setRatingName('Excellent');
     })()
   },[id])
 
   return (
-    <div className='bg-gray-800 border border-gray-500 rounded-2xl pb-2 w-full flex flex-col h-1/2'>
-        <img src={service?.image} alt=""  className=' rounded-t-2xl h-[300px]'/>
+    <div className='bg-gray-800 border border-gray-500 rounded-2xl pb-2 w-full flex items-stretch justify-evenly flex-1 flex-col h-1/2'>
+        <img src={service?.image} alt=""  className=' rounded-t-2xl h-[300px] object-cover'/>
         <div className='p-4'>
             <h1 className='text-xl font-bold'>{service?.name}</h1>
             <h1 className='text-primary-500 mt-2'>{options[service?.type]}</h1>
@@ -39,7 +39,7 @@ const CompareCard = ({id}) => {
                 {service?.location}</h1>
 
             <h1 className='mt-2 text-wrap'><span className='text-gray-400'>Description: </span>{service?.description}</h1>
-            <h1 className='mt-2 text-md'>Reviews: 20</h1>
+            <h1 className='mt-2'>Reviews: {service?.reviewCount}</h1>
         <h1 className='mt-2'>Ratings:</h1>
           <ul>
             <li className=''>Overall: <span className='text-primary-500'>{service?.rating} - {ratingName}</span></li> 

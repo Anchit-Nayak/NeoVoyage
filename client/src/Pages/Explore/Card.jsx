@@ -2,9 +2,9 @@ import React from 'react'
 
 const Card = ({id, onCheckboxChange, service}) => {
   let ratingName;
-  if(service?.rating <= 3 && service?.rating >= 0) ratingName = 'Inadequate';
-  else if(service?.rating <= 6 && service?.rating >= 4) ratingName = 'Satisfactory';
-  else if(service?.rating <= 8 && service?.rating >= 7) ratingName = 'Good';
+  if(service?.rating <= 3) ratingName = 'Inadequate';
+  else if(service?.rating <= 6) ratingName = 'Satisfactory';
+  else if(service?.rating <= 8) ratingName = 'Good';
   else ratingName = 'Excellent';
   const options = {
     "attraction":"Tourist Attractions",

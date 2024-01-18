@@ -52,18 +52,20 @@ const RatingCard = ({service}) => {
                 {/*body*/}
                 <div className="relative p-6 pb-3 flex-auto">
                   <form action="" method="post" className='flex flex-col'>
-                    <div className='py-2 space-x-3'>
+                    <div className='py-2 space-x-3 w-full flex flex-row items-baseline'>
                     <label htmlFor="" className=''>Safety: </label>
-                    <input type="text" value={safety} onChange={(e)=>setSafety(e.target.value)} className='p-2 mt-1 rounded-xl w-28 bg-gray-700'/>
-                    <p className='text-xl'>/10</p>
+                    <input type="text" value={safety} onChange={(e)=>setSafety(e.target.value)} className='p-2 text-lg mt-1 rounded-lg w-16 bg-gray-700'/>
+                    <p className='text-xl font-bold'>/10</p>
                     </div>
-                    <div className='py-2 space-x-3'>
+                    <div className='py-2 space-x-3 w-full flex flex-row items-baseline'>
                     <label htmlFor="" className='mt-4'>Reliability: </label>
-                    <input type="text" value={honesty} onChange={(e)=>setHonesty(e.target.value)} className='p-2 mt-1 rounded-xl w-28 bg-gray-700'/>
+                    <input type="text" value={honesty} onChange={(e)=>setHonesty(e.target.value)} className='p-2 text-lg mt-1 rounded-lg w-16 bg-gray-700'/>
+                    <p className='text-xl font-bold'>/10</p>
                     </div>
-                    <div className='py-2 space-x-3'>
+                    <div className='py-2 space-x-3 w-full flex flex-row items-baseline'>
                     <label htmlFor="" className='mt-4'>Cost Effectiveness: </label>
-                    <input type="text" value={pricing} onChange={(e)=>setPricing(e.target.value)} className='p-2 mt-1 rounded-xl w-28 bg-gray-700'/>
+                    <input type="text" value={pricing} onChange={(e)=>setPricing(e.target.value)} className='p-2 text-lg mt-1 rounded-lg w-16 bg-gray-700'/>
+                    <p className='text-xl font-bold'>/10</p>
                     </div>
                   </form>
                 </div>
