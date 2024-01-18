@@ -13,6 +13,10 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
+      honestyRating:{
+        type: Number,
+        required: true,
+      },
     comment: {
         type: String,
         required: true
