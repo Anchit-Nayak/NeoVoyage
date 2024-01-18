@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 
-const RatingFilter = () => {
+const RatingFilter = ({setRatingFilter}) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('none');
   
     const toggleDropdown = () => {
       setIsOpen((prevIsOpen) => !prevIsOpen);
     };
   
     const selectOption = (option) => {
-      setSelectedOption(option);
+      setSelectedOption(options[option]);
+      setRatingFilter(options[option]);
       setIsOpen(false);
     };
+    // console.log(selectedOption)
   
-    const options = ["None", "High To Low", "Low To High"];
+    const options = {"None":"none", "Low to high":"lowtohigh", "High to low":"hightolow"};
   
     return (
       <div className="filter-container w-auto bg-gray-700 mb-4 hover:bg-gray-600 rounded-lg p-2 px-4 font-thin border border-gray-600" onClick={toggleDropdown}>
@@ -30,7 +32,7 @@ const RatingFilter = () => {
         </button>
         {isOpen && (
           <ul className="filter-options text-white max-w-md divide-y divide-gray-700">
-            {options.map((option, index) => (
+            {Object.keys(options).map((option, index) => (
               <li
                 key={index}
                 onClick={() => selectOption(option)}
