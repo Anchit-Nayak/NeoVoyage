@@ -4,6 +4,7 @@ import CategoryFilter from '../../Components/Explore/CategoryFilter'
 import RatingFilter from '../../Components/Explore/RatingFilter';
 import LocationFilter from '../../Components/Explore/LocationFilter';
 import toast, { Toaster } from 'react-hot-toast';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { getServices } from '../../api';
 
 
@@ -16,7 +17,6 @@ const Explore = () => {
   useEffect(()=>{
     (async function(){
       const response = await getServices({serviceType: category, sortByRate: ratingFilter, location})
-      console.log(response)
       setServices(response)
     })()
 
@@ -36,7 +36,7 @@ const Explore = () => {
       setSelectedCards((prevSelected) => {
         const isSelected = prevSelected.includes(card);
         if (isSelected) {
-          return prevSelected.filter((selectedCard) => selectedCard !== card);
+          return prevSelected.filter((selectedCard) => selectedCard != card);
         } else {
           return [...prevSelected, card];
         }
@@ -52,12 +52,8 @@ const Explore = () => {
       setButtonColor('bg-gray-500 cursor-default');
       setCompare(0);
     }
+    localStorage.setItem('myArray', JSON.stringify(selectedCards));
   }, [selectedCards.length])
-
-  // useEffect(()=>{
-  //   axios.get('')
-  //   .then((res) => {setServices(res)});
-  // }, [])
 
   return (
     <div className='wrapper-container h-screen w-full py-3'>
@@ -77,8 +73,8 @@ const Explore = () => {
          <div className='w-3/4'>
          {services.length == 0 ?
          <h1 className='text-4xl font-bold text-gray-300'>No Services Available</h1>  
-         :services.map((service, index)=>{
-          return <Card key={index} onCheckboxChange={handleCheckboxChange} index={index} service={service}/>
+         :services.map((service)=>{
+          return <Card key={service._id} id={service._id} onCheckboxChange={handleCheckboxChange} service={service}/>
          })}
          </div>
          
@@ -86,7 +82,7 @@ const Explore = () => {
         <CategoryFilter setCategory={setCategory}/>
          <RatingFilter setRatingFilter={setRatingFilter}/>
          <LocationFilter setLocation={setLocation}/>
-          {
+        {
             services.length == 0 ?
          "" :
          <a href={`/compare`} className={`${canCompare ? ``: `pointer-events-none`} w-full`}>

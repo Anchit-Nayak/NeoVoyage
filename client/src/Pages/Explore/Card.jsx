@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({cardData, onCheckboxChange, index, service}) => {
+const Card = ({id, onCheckboxChange, service}) => {
   let ratingName;
   if(service?.rating <= 3 && service?.rating >= 0) ratingName = 'Inadequate';
   else if(service?.rating <= 6 && service?.rating >= 4) ratingName = 'Satisfactory';
@@ -16,8 +16,8 @@ const Card = ({cardData, onCheckboxChange, index, service}) => {
   return (
     <div className='w-full h-auto text-white'>
     <a href={`/service/${service?._id}`} className="w-full h-[200px] mx-auto flex flex-col border mb-4 border-gray-500 rounded-xl md:flex-row bg-gray-800 hover:bg-gray-700">
-        <img className="w-[350px] rounded-xl h-[200px] p-1" src={service?.image} alt=""/>
-        <div className="p-4 flex flex-row w-full justify-between">
+        <img className="h-1/2 flex-2 md:h-auto md:rounded-lg object-cover w-full md:w-inherit rounded-t-lg" src={service?.image} alt=""/>
+        <div className="p-4 flex flex-row w-full leading-normal justify-between pr-12 flex-3">
          <div className=''>
            <div className='flex items-start'>
             <h5 className="mb-3 text-3xl flex font-bold text-white">{service?.name}
@@ -48,7 +48,7 @@ const Card = ({cardData, onCheckboxChange, index, service}) => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
           </svg>
 
-          <input type="checkbox" name="" id="" onChange={() => onCheckboxChange(index)} className='h-7 mt-10'/>
+          <input type="checkbox" name="" id="" onChange={() => onCheckboxChange(id)} className='h-7 mt-10'/>
           </div>
         </div>
 
