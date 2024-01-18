@@ -25,7 +25,7 @@ const BuisnessSignup = () => {
           toast.error("Terms and conditions not agreed")
         }else{
           try{
-            const response = await axios.post("", {
+            const response = await axios.post("http://localhost:3000/user/signupBusiness", {
               ...values,
             }
             );
@@ -40,6 +40,7 @@ const BuisnessSignup = () => {
           }
         }
     }
+  
   return (
     <section class="bg-gray-900">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

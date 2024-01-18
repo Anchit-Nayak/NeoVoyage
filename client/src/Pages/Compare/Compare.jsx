@@ -14,7 +14,7 @@ const Compare = () => {
     }
   }, []);
   return (
-    <div className='wrapper-container h-full w-full text-white py-10 flex items-baseline justify-between space-x-3'>
+    <div className='wrapper-container h-full w-full text-white py-10 flex flex-row justify-items-stretch items-stretch space-x-3'>
       {
         dataArray.map((id)=>{
           return <CompareCard key={id} id={id}/>

@@ -21,7 +21,8 @@ const OtpVerification = () => {
       localStorage.setItem("email",response.data.email)
       localStorage.setItem("role",response.data.role)
       toast.success("Registration Successfull!")
-      navigate("/");
+      if(response.data.role == "tourist") navigate("/");
+      else navigate('/form');
     } catch (error){
       toast.error(error.response.data.message)
       console.log(error);
