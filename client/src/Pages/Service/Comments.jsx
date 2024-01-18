@@ -11,10 +11,10 @@ const Comments = ({service,reviews}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await postReview({comment,userId,service})
+    const response = await postReview({comment,userId,serviceId:service})
     console.log(response)
     if(response) toast.success(response.message)
-    setComment('')
+    window.location.reload();
   }
   return (
     <section class="w-100 py-8 lg:py-16 antialiased rounded-lg">
@@ -36,7 +36,7 @@ const Comments = ({service,reviews}) => {
             class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-900 hover:bg-primary-800">
             Post comment
         </button>
-        <RatingCard/>
+        <RatingCard service={service}/>
         </div>
     </form>
     {

@@ -15,4 +15,9 @@ const postReview = async (data) => {
     return response.data;
 }
 
-export {getServices, getServiceDetails, postReview}
+const rateService = async (data) => {
+    const response = await axios.post('http://localhost:3000/service/rating',data)
+    return response.data;
+}
+
+export {getServices, getServiceDetails, postReview, rateService}

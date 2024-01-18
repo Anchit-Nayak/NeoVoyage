@@ -40,7 +40,7 @@ const Service = () => {
           <br />
           <GetGeoLocation/>
           <br />
-          Ratings:
+          Ratings
           <ul>
             <li className='text-xl font-bold'>Safety: <span className='text-primary-500'>{service?.safetyRating}</span></li>
             <li className='text-xl font-bold'>Reliability: <span className='text-primary-500'>{service?.honestyRating}</span></li>

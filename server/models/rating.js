@@ -17,12 +17,12 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-    comment: {
-        type: String,
-        required: true
-    },
+      service:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'service',  
+      }
   });
 
-  const Review = mongoose.model("review", reviewSchema);
+  const Rating = mongoose.model("rating", reviewSchema);
 
-module.exports = Review;
+module.exports = Rating;

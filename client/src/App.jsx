@@ -13,7 +13,7 @@ import Dashboard from './Pages/BuisnessDashboard.jsx/Dashboard';
 import Form from './Pages/BuisnessDashboard.jsx/Form';
 
 const isAuthenticated = () => {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem('userId');
   return !!accessToken; // Returns true if there is an access token, false otherwise
 };
 const TouristRoute = ({ component: Component }) => {
@@ -48,7 +48,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<Home/>} />
-        <Route path="/explore" element={<TouristRoute component={<Explore/>}/>} />
+        <Route path="/explore" element={<TouristRoute component={Explore}/>} />
         <Route path="/compare" element={<Compare/>} />
         <Route path="/service/:id" element={<Service/>} />
         <Route path='/advisory' element={<Advisory/>}/>
