@@ -1,6 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { toast, Toaster } from 'react-hot-toast';
 
 const Signin = () => {
+    const otpflag = "Verify your email address by entering the OTP sent to your email"
+    const [values, setValues] = useState({
+        email:"",
+        password:"",
+    });
+    const navigate = useNavigate()
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
+        try{
+          const response = await axios.post("", {
+            ...values,
+          }
+          );
+          //console.log(response);
+          localStorage.setItem("accessToken",response.data.accessToken)
+          localStorage.setItem("userId",response.data._id)
+          localStorage.setItem("email",response.data.email)
+          localStorage.setItem("userType",response.data.userType)
+          toast.success("Login successful! Redirecting to Homescreen")
+          navigate("/");
+
+        }catch (error){
+            console.log(error);
+            toast.error(error.response.data.message)
+            if(error.response.data.message == otpflag){
+                const id = error.response.data.userId;
+                navigate("/verification", {state: {key : id}});
+            }
+            //console.log(error);
+        }
+    }
   return (
     <section class="bg-gray-900">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -30,6 +64,7 @@ const Signin = () => {
                         Dont have an account yet? <a href="/signup" class="font-medium hover:underline text-primary-500">Sign up</a>
                     </p>
                 </form>
+                <Toaster/>
             </div>
         </div>
         
