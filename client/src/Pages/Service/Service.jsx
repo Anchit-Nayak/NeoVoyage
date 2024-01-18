@@ -1,14 +1,15 @@
 import React from 'react'
 import Comments from './Comments'
+import GetGeoLocation from '../GeoLocation/GetGeoLocation'
 
 const Service = () => {
   return (
     <div className='w-full h-96 relative bg-gradient-to-b from-gray-500 to-gray-900'>
-    <img src="src/assets/hero_image.jpeg" alt=""  className='w-full h-full object-cover absolute mix-blend-overlay'/>
+    <img src="https://t3.ftcdn.net/jpg/00/29/13/38/360_F_29133877_bfA2n7cWV53fto2BomyZ6pyRujJTBwjd.jpg" alt=""  className='w-full h-full object-cover absolute mix-blend-overlay'/>
     <div className='wrapper-container content-start p-4 py-48 h-screen'>
        <div className='mb-6'>
-        <h1 className='text-slate-200 font-lato font-bold text-3xl md:text-5xl mb-2'>Hotel Meridian</h1>
-        <h1><span className='text-primary-500 text-xl'>Hotel</span></h1>
+        <h1 className='text-slate-100 font-lato font-bold text-3xl md:text-5xl mb-2'>Hotel Meridian</h1>
+        <h1><span className='text-slate-100 text-xl'>Hotel</span></h1>
         </div>
         <div className='bg-gray-800 h-auto w-full rounded-lg text-gray-100 p-8 backdrop-brightness-200'>
         <div className='flex flex-row'>
@@ -17,6 +18,8 @@ const Service = () => {
           <h1><span className='font-bold'>Location: </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est voluptas recusandae ullam aperiam repellendus non.</h1>
           <br />
           <h1><span className='font-bold'>Description: </span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quae consectetur culpa vero fuga, repellendus, cumque ea corporis nulla minima dolores velit esse. Neque quis cumque, eos deserunt quaerat ullam!</h1>
+          <br />
+          <GetGeoLocation/>
           <br />
           Ratings:
           <ul>
