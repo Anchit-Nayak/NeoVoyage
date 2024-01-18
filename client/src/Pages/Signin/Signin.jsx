@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 
+
 const Signin = () => {
     const otpflag = "Verify your email address by entering the OTP sent to your email"
     const [values, setValues] = useState({
@@ -13,7 +14,7 @@ const Signin = () => {
     const handleSubmit = async(e) =>{
         e.preventDefault();
         try{
-          const response = await axios.post("", {
+          const response = await axios.post("http://localhost:3000/user/login", {
             ...values,
           }
           );
@@ -21,13 +22,12 @@ const Signin = () => {
           localStorage.setItem("accessToken",response.data.accessToken)
           localStorage.setItem("userId",response.data._id)
           localStorage.setItem("email",response.data.email)
-          localStorage.setItem("userType",response.data.userType)
+          localStorage.setItem("role",response.data.role)
           toast.success("Login successful! Redirecting to Homescreen")
           navigate("/");
 
         }catch (error){
-            console.log(error);
-            toast.error(error.response.data.message)
+            toast.error(error.response.data)
             if(error.response.data.message == otpflag){
                 const id = error.response.data.userId;
                 navigate("/verification", {state: {key : id}});
@@ -47,14 +47,14 @@ const Signin = () => {
                 <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl text-white">
                     Sign in to your account
                 </h1>
-                <form class="space-y-4 md:space-y-6" action="#">
+                <form onSubmit={handleSubmit} class="space-y-4 md:space-y-6" action="#">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-white">Your email</label>
-                        <input type="email" name="email" id="email" class="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="name@gmail.com" required=""/>
+                        <input type="email" name="email" id="email" class="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="name@gmail.com" required="" onChange={(e)=>setValues({...values, [e.target.name]:e.target.value})}/>
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-white">Password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" required=""/>
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="border sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" required="" onChange={(e)=>setValues({...values, [e.target.name]:e.target.value})}/>
                     </div>
                     <div class="text-end">
                         <a href="#" class="text-sm font-medium hover:underline text-primary-500">Forgot password?</a>
