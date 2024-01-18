@@ -6,6 +6,7 @@ import Layout from './Layout';
 import Explore from './Pages/Explore/Explore';
 import Compare from './Pages/Compare/Compare';
 import Service from './Pages/Service/Service';
+import Advisory from './Pages/Advisory/Advisory';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/explore" element={<Explore/>} />
         <Route path="/compare" element={<Compare/>} />
         <Route path="/service/:id" element={<Service/>} />
+        <Route path='/advisory' element={<Advisory/>}/>
       </Route>
       <Route path="/signin" element={<Signin/>} />
       <Route path="/signup" element={<Signup />} />
