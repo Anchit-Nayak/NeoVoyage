@@ -48,12 +48,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<Home/>} />
-<<<<<<< HEAD
         <Route path="/explore" element={<TouristRoute component={Explore}/>} />
-=======
-        {/* <Route path="/explore" element={<TouristRoute component={<Explore/>}/>} /> */}
-        <Route path="/explore" element={<Explore/>}/>
->>>>>>> d3bcf52925db2d384398c7aa307651caa3ed189a
         <Route path="/compare" element={<Compare/>} />
         <Route path="/service/:id" element={<Service/>} />
         <Route path='/advisory' element={<Advisory/>}/>
