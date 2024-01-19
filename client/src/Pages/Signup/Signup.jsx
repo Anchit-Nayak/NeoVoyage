@@ -68,6 +68,9 @@ const Signup = () => {
                   <p class="text-sm font-light text-gray-400">
                       Already have an account? <a href="/signin" class="font-medium  hover:underline text-primary-500">Login here</a>
                   </p>
+                  <p class="text-sm font-light text-gray-400">
+                      Want your buisness to be listed on our site? <a href="/servicesignup" class="font-medium  hover:underline text-primary-500">Sign up here</a>
+                  </p>
               </form>
               <Toaster/>
           </div>
