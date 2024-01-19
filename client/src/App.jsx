@@ -13,14 +13,14 @@ import Dashboard from './Pages/BuisnessDashboard.jsx/Dashboard';
 import Form from './Pages/BuisnessDashboard.jsx/Form';
 
 const isAuthenticated = () => {
-  const accessToken = JSON.stringify(localStorage.getItem('userId'));
+  const accessToken = localStorage.getItem('userId');
   console.log(accessToken)
   return !!accessToken; // Returns true if there is an access token, false otherwise
 };
 
 const TouristRoute = ({ component: Component }) => {
   if (isAuthenticated()) {
-    const type = JSON.stringify(localStorage.getItem("role"));
+    const type = localStorage.getItem("role");
     console.log(type);
     if(type == "business"){
       return <Navigate to="/signin" />
@@ -34,7 +34,7 @@ const TouristRoute = ({ component: Component }) => {
 
 const BusinessRoute = ({ component: Component }) => {
   if (isAuthenticated()) {
-    const type = JSON.stringify(localStorage.getItem("role"));
+    const type = localStorage.getItem("role");
     if(type == "tourist"){
       return <Navigate to="/" />
     }

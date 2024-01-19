@@ -8,8 +8,8 @@ const CommentCard = ({review}) => {
             <div class="flex items-center">
                 <p class="inline-flex items-center mr-3 text-sm text-white font-semibold"><img
                         class="mr-2 w-6 h-6 rounded-full"
-                        src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                        alt="Michael Gough"/>{review?.user?.fullName}</p>
+                        src="https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+                        alt="tourist"/>{review?.user?.fullName}</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                         title="February 8th, 2022">{moment(review.epoch * 1000).format('DD MMM, YYYY')}</time></p>
             </div>
