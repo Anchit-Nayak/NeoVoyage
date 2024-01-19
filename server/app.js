@@ -22,8 +22,18 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+app.use((err, req, res, next) => {
+  console.error(err); 
+  if(err.status === 400)
+    return res.status(err.status).send('Dude, you messed up the JSON');
+
+  return next(err);
+});
 app.use('/service',require('./routers/serviceRouter'))
 app.use('/user',require('./routers/userRouter'))
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'Route not found' });
+});
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
